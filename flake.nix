@@ -6,13 +6,11 @@
   outputs = { self, nixpkgs, flake-utils }: flake-utils.lib.eachDefaultSystem (system:
     let
       pkgs = nixpkgs.legacyPackages.${system};
-      nodejs = pkgs.nodejs-slim-18_x;
     in
     {
       devShells.default = pkgs.mkShell {
         packages = [
-          nodejs
-          (pkgs.yarn.override { inherit nodejs; })
+          pkgs.nodejs_20
         ];
       };
     }
