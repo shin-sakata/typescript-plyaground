@@ -1,9 +1,5 @@
 {
-  "extends": [
-    "@tsconfig/recommended/tsconfig",
-    "@tsconfig/strictest/tsconfig",
-    "@tsconfig/node20/tsconfig"
-  ],
+  "extends": ["@tsconfig/strictest/tsconfig", "@tsconfig/node20/tsconfig"],
   "compilerOptions": {
     "rootDir": "./src",
     "outDir": "./dist"
