@@ -5,6 +5,7 @@
   "license": "MIT",
   "private": true,
   "scripts": {
+    "upgrade": "npx ncu -u && npm i",
     "prestart": "tsc",
     "start": "node dist/index.js"
   },
@@ -12,7 +13,7 @@
     "@tsconfig/node20": "^1.0.2",
     "@tsconfig/recommended": "^1.0.2",
     "@tsconfig/strictest": "^2.0.1",
-    "@types/node": "^20.3.2",
+    "@types/node": "^20.3.3",
     "npm-check-updates": "^16.10.13",
     "rome": "12.1.3",
     "typescript": "^5.1.6"
