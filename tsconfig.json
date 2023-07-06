@@ -23,8 +23,7 @@
         "moduleResolution": "node16",
         "rootDir": "./src",
         "outDir": "./dist",
-        "incremental": true,
-        "tsBuildInfoFile": "./dist/tsconfig.tsbuildinfo"
+        "noEmit": true
     },
     "files": [
         "./src/app/index.ts",
