@@ -6,24 +6,29 @@ NCU = npx ncu
 
 TS_FILES := $(wildcard src/**/*.ts)
 OUT_DIR := dist
+NODE_MODULES := node_modules
 
 tsconfig.json: tsconfig.base.json
 	$(TSC) -p $^ --showConfig > $@
 
-start: tsconfig.json
-	$(TS_NODE) src/app/index.ts
+$(NODE_MODULES): package.json package-lock.json
+	npm i
 
-test: tsconfig.json
-	$(TS_NODE) src/tests/index.ts
-
-typecheck: $(TS_FILES) tsconfig.json
-	$(TSC) --noEmit
-
-$(OUT_DIR): $(TS_FILES) tsconfig.json
+$(OUT_DIR): $(NODE_MODULES) $(TS_FILES) tsconfig.json
 	$(TSC)
 
-upgrade:
-	$(NCU) -u && npm i
+start: $(NODE_MODULES) tsconfig.json
+	$(TS_NODE) src/app/index.ts
+
+test: $(NODE_MODULES) tsconfig.json
+	$(TS_NODE) src/tests/index.ts
+
+typecheck: $(NODE_MODULES) $(TS_FILES) tsconfig.json
+	$(TSC) --noEmit
+
+upgrade: $(NODE_MODULES)
+	$(NCU) -u
+	$(MAKE) $(NODE_MODULES)
 
 clean:
-	rm -rf $(OUT_DIR)
+	rm -rf $(OUT_DIR) $(NODE_MODULES)
