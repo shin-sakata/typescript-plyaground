@@ -22,8 +22,7 @@
         "target": "es2022",
         "moduleResolution": "node16",
         "rootDir": "./src",
-        "outDir": "./dist",
-        "noEmit": true
+        "outDir": "./dist"
     },
     "files": [
         "./src/app/index.ts",

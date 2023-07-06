@@ -2,7 +2,6 @@
   "extends": ["@tsconfig/strictest/tsconfig", "@tsconfig/node20/tsconfig"],
   "compilerOptions": {
     "rootDir": "./src",
-    "outDir": "./dist",
-    "noEmit": true
+    "outDir": "./dist"
   }
 }
