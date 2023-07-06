@@ -1,8 +1,8 @@
-.PHONY: start test typecheck upgrade clean
+.PHONY: start test typecheck upgrade clean all
 
-TSC = npx tsc
-TS_NODE = npx ts-node
-NCU = npx ncu
+TSC := npx tsc
+TS_NODE := npx ts-node
+NCU := npx ncu
 
 TS_FILES := $(wildcard src/**/*.ts)
 OUT_DIR := dist
