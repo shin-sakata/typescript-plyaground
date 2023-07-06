@@ -3,7 +3,7 @@ import assert from "node:assert";
 
 import { add } from "../lib";
 
-describe("add", { skip: process.env["TEST"] }, () => {
+describe("add", () => {
   it("should add two numbers", () => {
     assert.strictEqual(add(1, 2), 3);
   });
