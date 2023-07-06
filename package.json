@@ -4,16 +4,6 @@
   "main": "index.js",
   "license": "MIT",
   "private": true,
-  "scripts": {
-    "configure": "tsc -p tsconfig.base.json --showConfig > tsconfig.json",
-    "prestart": "npm run configure",
-    "start": "ts-node src/app/index.ts",
-    "pretest": "npm run configure",
-    "test": "ts-node src/tests/index.ts",
-    "upgrade": "npx ncu -u && npm i",
-    "pretypecheck": "npm run configure",
-    "typecheck": "tsc --noEmit"
-  },
   "devDependencies": {
     "@tsconfig/node20": "^1.0.2",
     "@tsconfig/strictest": "^2.0.1",
