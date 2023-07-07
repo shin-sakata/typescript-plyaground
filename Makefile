@@ -1,34 +1,43 @@
-.PHONY: start test typecheck upgrade clean all
+.PHONY: install start test typecheck upgrade clean build
 
 TSC := npx tsc
 TS_NODE := npx ts-node
 NCU := npx ncu
 
-TS_FILES := $(wildcard src/**/*.ts)
+SRC_DIR := src
+TS_FILES := $(wildcard $(SRC_DIR)/**/*.ts)
 OUT_DIR := dist
 NODE_MODULES := node_modules
+
+define npm_install
+	npm install
+endef
 
 tsconfig.json: tsconfig.base.json
 	$(TSC) -p $^ --showConfig > $@
 
 $(NODE_MODULES): package.json package-lock.json
-	npm i
+	$(call npm_install)
 
 $(OUT_DIR): $(NODE_MODULES) $(TS_FILES) tsconfig.json
 	$(TSC)
 
-start: $(NODE_MODULES) tsconfig.json
-	$(TS_NODE) src/app/index.ts
+install: $(NODE_MODULES)
 
-test: $(NODE_MODULES) tsconfig.json
-	$(TS_NODE) src/tests/index.ts
+build: $(OUT_DIR)
 
-typecheck: $(NODE_MODULES) $(TS_FILES) tsconfig.json
+start: install tsconfig.json
+	$(TS_NODE) $(SRC_DIR)/app/index.ts
+
+test: install tsconfig.json
+	$(TS_NODE) $(SRC_DIR)/tests/index.ts
+
+typecheck: install $(TS_FILES) tsconfig.json
 	$(TSC) --noEmit
 
-upgrade: $(NODE_MODULES)
+upgrade: install
 	$(NCU) -u
-	$(MAKE) $(NODE_MODULES)
+	$(call npm_install)
 
 clean:
 	rm -rf $(OUT_DIR) $(NODE_MODULES)
